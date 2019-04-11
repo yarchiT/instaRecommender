@@ -4,10 +4,10 @@ from os.path import join, dirname
 
 setup(
     name = "instagram",
-    version = "2.0",
-    author = "Oleg Yurchik",
-    author_email = "oleg.yurchik@protonmail.com",
-    url = "https://github.com/OlegYurchik/pyInstagram",
+    version = "1.0",
+    author = "Yaroslav Tykhonchuk",
+    author_email = "ytykhonchuk@gmail.com",
+    url = "",
     description = "",
     long_description = open(join(dirname(__file__), "README.md")).read(),
     packages = find_packages(),
