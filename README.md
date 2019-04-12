@@ -25,4 +25,13 @@ You need to build and run the docker-compose file
     docler-compose up --build -d
 ``` 
 
+## Development details
+
+**Web app:**
+I have three main processes
+1. Nginx: Webserver listens on port 80 for incoming HTTP requests from the internet. It will handle static files (html/css/js) by itself, but in case request need to be dynamically generated, it will then be passed to the applciation - Gunicorn
+2. Gunicorn: Listens on another port for HTTP requests from nginx. Gunicorn is configured with my python web app.
+3. Database
+
+
 
