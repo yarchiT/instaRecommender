@@ -16,9 +16,13 @@ User Guide
 ## Basic Installation
 
 For basic installation you should have docker installed on your system.
+You need to build and run the docker-compose file
 
 ```bash
-
+1. cd instaRecommender
+2. docker-compose up --build
+    or if you want to run containers on background mode, add parameter -d
+    docler-compose up --build -d
 ``` 
 
 

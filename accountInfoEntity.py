@@ -4,6 +4,8 @@ class AccountInfoEntity():
         self.username = username
         self.bio = ""
         self.posts = []
+        self.total_media_count = 0
+        self.parsed_post_count = 0
 
 class PostEntity():
     def __init__(self):
@@ -14,5 +16,8 @@ class PostEntity():
 
 class LocationEntity():
     def __init__(self, id):
+        self.id = id
         self.name = ""
+        self.city = ""
         self.country = ""
+        
