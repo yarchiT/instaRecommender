@@ -1,7 +1,9 @@
 from instagram.agents import WebAgent, WebAgentAccount
 from instagram.entities import Account, Media, Location, Tag
-from accountInfoEntity import AccountInfoEntity
+from accountInfoEntity import AccountInfoEntity, PostEntity, LocationEntity
 import json
+import re
+import jsonpickle
 
 
 def get_account_info_json(username):
@@ -10,18 +12,24 @@ def get_account_info_json(username):
     account = WebAgentAccount(username)
     agent.update(account)
 
+    #accountInfo.bio = account.bio
     posts = agent.get_media(account, count=6)[0]
 
     for post in posts:
+        postEntity = PostEntity()
         if not post.location is None:
-            accountInfo.locations.append(post.location.id)
+            postEntity.location = LocationEntity(post.location.id)
+            agent.update(post.location)
         
         if not post.caption is None:
-            accountInfo.captions.append(post.caption)
+            postEntity.hash_tags.append(re.findall(r"#(\w+)", post.caption))
+            postEntity.caption = post.caption
 
         if not post.is_video:
-            accountInfo.photo_urls.append(post.display_url)
+            postEntity.photo_url = post.display_url
+        
+        accountInfo.posts.append(postEntity)
     
-    accountInfoJson = json.dumps(accountInfo.__dict__)
+    accountInfoJson = jsonpickle.encode(accountInfo)
     return accountInfoJson
 

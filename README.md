@@ -1,5 +1,5 @@
 # instagramRecommender
-[![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)]()
+[![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yarchiT/instaRecommender)
 [![built with Python3](https://img.shields.io/badge/built%20with-Python3-red.svg)](
 https://www.python.org/)
 
@@ -15,7 +15,7 @@ User Guide
 
 ## Basic Installation
 
-To basic installation you should have docker installed on your system.
+For basic installation you should have docker installed on your system.
 
 ```bash
 
