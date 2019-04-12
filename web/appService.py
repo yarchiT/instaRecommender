@@ -18,7 +18,7 @@ def get_account_info_json(username):
 
         accountInfo.bio = account.biography
         accountInfo.total_media_count = account.media_count
-        posts = agent.get_media(account, count=account.media_count)[0]
+        posts = agent.get_media(account, count=100)[0]  # account.media_count
     except:
         print("error while getting account info")
    

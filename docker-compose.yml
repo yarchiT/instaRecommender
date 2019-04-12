@@ -6,14 +6,28 @@ services:
   #   volumes:
   #     - "dbdata:/var/lib/postgresql/data"
   web:
-    build: .
-    command: python apiController.py
+    build: ./web
+    command: gunicorn --bind 0.0.0.0:5000 wsgi:app   # uncomment for production
+    # command: python app.py
     volumes:
       - .:/code
     ports:
-      - "5000:5000"
+      - "5000"
     networks:
       - web_nw
+  
+  nginx:
+    image: nginx:latest
+    build: ./nginx
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - web
+    networks:
+      - web_nw
+
 
 volumes:
   dbdata:

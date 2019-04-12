@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  # db:
+  #   image: postgres:latest
+  #   volumes:
+  #     - "dbdata:/var/lib/postgresql/data"
+  web:
+    build: .
+    command: python apiController.py
+    volumes:
+      - .:/code
+    ports:
+      - "5000:5000"
+    networks:
+      - web_nw
+
+volumes:
+  dbdata:
+
+networks:
+  db_nw:
+    driver: bridge
+  web_nw:
+    driver: bridge
