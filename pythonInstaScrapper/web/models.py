@@ -9,15 +9,11 @@ class AccountInfoEntity():
 
 class PostEntity():
     def __init__(self):
-        self.location = None
         self.hash_tags = []
         self.photo_url = ""
         self.caption = ""
+        self.location_id = ""
+        self.location_name = ""
+        self.location_country = ""
 
-class LocationEntity():
-    def __init__(self, id):
-        self.id = id
-        self.name = ""
-        self.city = ""
-        self.country = ""
         

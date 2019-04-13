@@ -1,4 +1,3 @@
-from accountInfoEntity import AccountInfoEntity
 import appService
 
 username = "xxmarlise" #xxmarlise simplemove17

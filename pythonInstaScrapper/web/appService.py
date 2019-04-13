@@ -1,6 +1,6 @@
 from instagram.agents import WebAgent, WebAgentAccount
 from instagram.entities import Account, Media, Location, Tag
-from models import AccountInfoEntity, PostEntity, LocationEntity
+from models import AccountInfoEntity, PostEntity
 import json
 import re
 import jsonpickle
@@ -30,12 +30,10 @@ def get_account_info_json(username):
             postEntity = PostEntity()
             if not post.location is None:
                 agent.update(post.location)
-                locationEntity = LocationEntity(post.location.id)
-                locationEntity.name = post.location.name
+                postEntity.location_id = post.location.id
+                postEntity.location_name = post.location.name
                 if post.location.directory is not None:
-                    locationEntity.city = post.location.directory.get("city").get("name")
-                    locationEntity.country = post.location.directory.get("country").get("name")
-                postEntity.location = locationEntity
+                    postEntity.location_country = post.location.directory.get("country").get("name")
                 
             if not post.caption is None:
                 postEntity.hash_tags = re.findall(r"#(\w+)", post.caption)
