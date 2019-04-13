@@ -7,6 +7,5 @@ RUN apk update \
 
 COPY . /app
 WORKDIR /app
-RUN pip install .
 RUN pip install -r requirements.txt
 EXPOSE 5000

@@ -4,3 +4,8 @@ pylint
 jsonpickle
 flask
 gunicorn
+aiohttp
+pytest
+pytest-asyncio
+pytest-random-order
+requests
