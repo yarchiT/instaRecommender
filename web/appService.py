@@ -1,6 +1,6 @@
 from instagram.agents import WebAgent, WebAgentAccount
 from instagram.entities import Account, Media, Location, Tag
-from accountInfoEntity import AccountInfoEntity, PostEntity, LocationEntity
+from models import AccountInfoEntity, PostEntity, LocationEntity
 import json
 import re
 import jsonpickle
