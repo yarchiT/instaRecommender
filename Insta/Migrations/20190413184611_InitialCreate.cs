@@ -2,7 +2,7 @@
 
 namespace Insta.Migrations
 {
-    public partial class InitCreate : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,6 +28,7 @@ namespace Insta.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    HashTags = table.Column<string>(nullable: true),
                     PhotoUrl = table.Column<string>(nullable: true),
                     Caption = table.Column<string>(nullable: true),
                     LocationId = table.Column<int>(nullable: false),

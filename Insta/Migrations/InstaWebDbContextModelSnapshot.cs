@@ -43,6 +43,8 @@ namespace Insta.Migrations
 
                     b.Property<string>("Caption");
 
+                    b.Property<string>("HashTags");
+
                     b.Property<string>("LocationCountry");
 
                     b.Property<int>("LocationId");

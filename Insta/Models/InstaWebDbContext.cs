@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Insta.Models
 {
+// dotnet ef migrations add InitialCreate
+// dotnet ef database update
     public class InstaWebDbContext : DbContext
     {
         public DbSet<AccountInfo> AccountInfo { get; set; }
@@ -20,6 +22,12 @@ namespace Insta.Models
             modelBuilder.Entity<Post>()
                 .HasOne(p => p.AccountInfo)
                 .WithMany(b => b.Posts);
+
+            modelBuilder.Entity<Post>()
+                .Property(e => e.HashTags)
+                .HasConversion(
+                    v => string.Join(',', v),
+                    v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
         }
 
        

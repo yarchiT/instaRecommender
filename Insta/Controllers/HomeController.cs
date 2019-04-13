@@ -12,14 +12,15 @@ namespace Insta.Controllers
     public class HomeController : Controller
     {
         private readonly IScrapService _scrapService;
+        private readonly InstaWebDbContext _context;
 
-        public HomeController(IScrapService scrapService)
+        public HomeController(IScrapService scrapService, InstaWebDbContext context)
         {
             _scrapService = scrapService;
+            _context = context;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            _scrapService.GetAccountInfoAsync("simplemove17");
             return View();
         }
 

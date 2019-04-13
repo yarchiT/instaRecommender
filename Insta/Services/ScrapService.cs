@@ -2,6 +2,7 @@ using System;
 using Insta.Models;
 using System.Threading.Tasks;
 using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace Insta.Services
 {
@@ -15,23 +16,35 @@ namespace Insta.Services
         }
 
 
-        public async Task GetAccountInfoAsync(string username)
+        public async Task<AccountInfo> GetAccountInfoAsync(string username)
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, 
-             $"http://localhost/?username={username}");
-
-            var client = _clientFactory.CreateClient();
-
-            var response = await client.SendAsync(request);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                Console.WriteLine("ok");
+                var request = new HttpRequestMessage(HttpMethod.Get, 
+                $"http://localhost/?username={username}&postNum=2");
+
+                var client = _clientFactory.CreateClient();
+
+                var response = await client.SendAsync(request);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonStringResponse = await response.Content.ReadAsStringAsync();
+                    AccountInfo accountInfo = JsonConvert.DeserializeObject<AccountInfo>(jsonStringResponse);
+                    return accountInfo;
+                }
+                else
+                {
+                    throw new Exception("Didn't parse");
+                }         
+
+            } catch (Exception ex)
+            {
+                Console.WriteLine("error");
             }
-            else
-            {
-               Console.WriteLine("error");
-            }          
+            
+            return null;
+            
         }
     }
 }

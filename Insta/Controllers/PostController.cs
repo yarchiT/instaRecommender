@@ -6,21 +6,32 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Insta.Models;
+using Insta.Services;
 
 namespace Insta.Controllers
 {
     public class PostController : Controller
     {
         private readonly InstaWebDbContext _context;
+        private readonly IScrapService _scrapService;
 
-        public PostController(InstaWebDbContext context)
+        public PostController(IScrapService scrapService, InstaWebDbContext context)
         {
             _context = context;
+            _scrapService = scrapService;
         }
 
         // GET: Post
         public async Task<IActionResult> Index()
         {
+            AccountInfo accountInfo = await _scrapService.GetAccountInfoAsync("simplemove17");
+            var account = await _context.AccountInfo.FirstOrDefaultAsync(x => x.Username == accountInfo.Username);
+
+            if (account == null)
+            {
+                await _context.AccountInfo.AddAsync(accountInfo);
+                await _context.SaveChangesAsync();
+            }
             return View(await _context.Posts.ToListAsync());
         }
 

@@ -5,6 +5,6 @@ namespace Insta.Services
 {
     public interface IScrapService
     {
-        Task GetAccountInfoAsync (string username);
+        Task<AccountInfo> GetAccountInfoAsync (string username);
     }
 }
