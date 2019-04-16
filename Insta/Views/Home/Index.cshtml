@@ -1,8 +1,30 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿
+@model String
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>Instagram posts recommender system</p>
+</div>
+
+@if (Model != null)
+{
+    <div id="error-block">
+        <span>@Model</span>
+    </div>
+}
+
+<div class="container">
+  <p>Enter your username so we can fetch public data about your personal posts</p>
+   <p>Your Instagram account should be public</p>
+    
+    <form asp-controller="Home" asp-action="GetUserPosts" class="form-group" method="get">
+        <input type="text" id="username" name="username" value="">
+        <button type="submit">Submit Form</button>
+    </form>
+
+    <!-- <div class="form-group">
+      <label for="usr">Username:</label>
+      <input type="text" class="form-control" id="usr">
+    </div>
+    <input type="submit" class="button" id="submitUsername" value="Submit"> -->
 </div>

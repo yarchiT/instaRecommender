@@ -16,12 +16,12 @@ namespace Insta.Services
         }
 
 
-        public async Task<AccountInfo> GetAccountInfoAsync(string username)
+        public async Task<AccountInfo> GetAccountInfoAsync(string username, int numOfPosts)
         {
             try
             {
                 var request = new HttpRequestMessage(HttpMethod.Get, 
-                $"http://localhost/?username={username}&postNum=2");
+                $"http://localhost/?username={username}&postNum={numOfPosts}");
 
                 var client = _clientFactory.CreateClient();
 

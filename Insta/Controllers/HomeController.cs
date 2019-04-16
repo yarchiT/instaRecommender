@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Insta.Models;
 using Insta.Services;
+using System.Diagnostics;
 
 namespace Insta.Controllers
 {
@@ -23,10 +25,28 @@ namespace Insta.Controllers
         {
             return View();
         }
-
-        public IActionResult Privacy()
+        [HttpGet]
+        public async Task<IActionResult> GetUserPosts(string username)
         {
-            return View();
+            var userPosts = new List<Post>();
+            try{
+                AccountInfo accountInfo = await _scrapService.GetAccountInfoAsync(username, 2);
+                var account = await _context.AccountInfo.FirstOrDefaultAsync(x => x.Username == accountInfo.Username);
+
+                if (account == null)
+                {
+                    await _context.AccountInfo.AddAsync(accountInfo);
+                    await _context.SaveChangesAsync();
+                }
+                userPosts = account.Posts;
+            }catch (Exception ex){
+
+            }
+
+            if (userPosts.Count == 0)
+            return View("Index", "We coudn't fetch data from your profile");
+            
+            return View(userPosts);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
