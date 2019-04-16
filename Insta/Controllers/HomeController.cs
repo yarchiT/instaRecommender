@@ -29,8 +29,9 @@ namespace Insta.Controllers
         public async Task<IActionResult> GetUserPosts(string username)
         {
             var userPosts = new List<Post>();
+            AccountInfo accountInfo = null;
             try{
-                AccountInfo accountInfo = await _scrapService.GetAccountInfoAsync(username, 2);
+                accountInfo = await _scrapService.GetAccountInfoAsync(username, 2);
                 var account = await _context.AccountInfo.FirstOrDefaultAsync(x => x.Username == accountInfo.Username);
 
                 if (account == null)
@@ -38,15 +39,15 @@ namespace Insta.Controllers
                     await _context.AccountInfo.AddAsync(accountInfo);
                     await _context.SaveChangesAsync();
                 }
-                userPosts = account.Posts;
+                userPosts = accountInfo.Posts;
             }catch (Exception ex){
 
             }
 
-            if (userPosts.Count == 0)
-            return View("Index", "We coudn't fetch data from your profile");
+            if (userPosts?.Count == 0 || accountInfo == null)
+                return View("Index", "We coudn't fetch data from your profile");
             
-            return View(userPosts);
+            return View(accountInfo);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

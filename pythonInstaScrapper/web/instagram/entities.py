@@ -112,6 +112,7 @@ class Media(UpdatableElement):
         self.display_url = None
         self.resources = None
         self.is_album = None
+        self.accessibility_caption = None
 
         self.album = set()
         self.likes = set()
