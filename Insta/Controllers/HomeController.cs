@@ -32,7 +32,7 @@ namespace Insta.Controllers
         {
             AccountInfo accountInfo = null;
             try{
-                accountInfo = await _scrapService.GetAccountInfoAsync(username, 2);
+                accountInfo = await _scrapService.GetAccountInfoAsync(username, 20);
                 if (accountInfo != null){
                     var account = await _context.AccountInfo.FirstOrDefaultAsync(x => x.Username == accountInfo.Username);
 
