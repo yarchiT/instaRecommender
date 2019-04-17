@@ -28,11 +28,12 @@ namespace Insta.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    OwnerUsername = table.Column<string>(nullable: true),
                     HashTags = table.Column<string>(nullable: true),
                     AccessibilityCaption = table.Column<string>(nullable: true),
                     PhotoUrl = table.Column<string>(nullable: true),
                     Caption = table.Column<string>(nullable: true),
-                    LocationId = table.Column<int>(nullable: false),
+                    LocationId = table.Column<string>(nullable: true),
                     LocationName = table.Column<string>(nullable: true),
                     LocationCountry = table.Column<string>(nullable: true),
                     AccountInfoID = table.Column<int>(nullable: false)

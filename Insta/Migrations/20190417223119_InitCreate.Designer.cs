@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Insta.Migrations
 {
     [DbContext(typeof(InstaWebDbContext))]
-    [Migration("20190417200557_InitCreate")]
+    [Migration("20190417223119_InitCreate")]
     partial class InitCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,9 +50,11 @@ namespace Insta.Migrations
 
                     b.Property<string>("LocationCountry");
 
-                    b.Property<int>("LocationId");
+                    b.Property<string>("LocationId");
 
                     b.Property<string>("LocationName");
+
+                    b.Property<string>("OwnerUsername");
 
                     b.Property<string>("PhotoUrl");
 

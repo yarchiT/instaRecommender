@@ -48,9 +48,11 @@ namespace Insta.Migrations
 
                     b.Property<string>("LocationCountry");
 
-                    b.Property<int>("LocationId");
+                    b.Property<string>("LocationId");
 
                     b.Property<string>("LocationName");
+
+                    b.Property<string>("OwnerUsername");
 
                     b.Property<string>("PhotoUrl");
 

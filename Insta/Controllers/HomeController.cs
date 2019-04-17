@@ -34,7 +34,6 @@ namespace Insta.Controllers
             try{
                 accountInfo = await _scrapService.GetAccountInfoAsync(username, 2);
                 if (accountInfo != null){
-                    var recommendedPosts = _recommenderService.GetRecommededPosts(_scrapService, accountInfo);
                     var account = await _context.AccountInfo.FirstOrDefaultAsync(x => x.Username == accountInfo.Username);
 
                     if (account == null)
@@ -51,8 +50,36 @@ namespace Insta.Controllers
             if ( accountInfo == null || accountInfo.Posts?.Count == 0 )
                 return View("Index", "We coudn't fetch data from your profile");
             
-            return View(accountInfo);
+            return View("ShowPosts", accountInfo.Posts);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetRecommendedPosts(string username)
+        {
+            List<Post> recommendedPosts = null;
+            try{
+                AccountInfo accountInfo = await _scrapService.GetAccountInfoAsync(username, 2);
+                if (accountInfo != null){
+                    recommendedPosts = await _recommenderService.GetRecommededPosts(_scrapService, accountInfo);
+                    var account = await _context.AccountInfo.FirstOrDefaultAsync(x => x.Username == accountInfo.Username);
+
+                    if (account == null)
+                    {
+                        await _context.AccountInfo.AddAsync(accountInfo);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+                
+            }catch (Exception ex){
+
+            }
+
+            if ( recommendedPosts == null || recommendedPosts?.Count == 0 )
+                return View("Index", "We coudn't fetch data from your profile");
+            
+            return View("ShowPosts", recommendedPosts);
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

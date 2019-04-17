@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Insta.Models;
 
@@ -6,34 +7,49 @@ namespace Insta.Services
 {
     public class RecommenderService : IRecommenderService
     {
-        private Dictionary<string,int> topHashtags;
+        private Dictionary<string,int> allHashtags;
         private Dictionary<string,int> topLocationCountries;
-        public Task<List<Post>> GetRecommededPosts(IScrapService scrapService, AccountInfo user)
+        public async Task<List<Post>> GetRecommededPosts(IScrapService scrapService, AccountInfo user)
         {
-           InitTopLocationHashtagPosts(user.Posts);
+            var recommendedPosts = new List<Post>(); 
+            InitTopLocationHashtagPosts(user.Posts);
+            var topHashtagList = new List<string>();
 
-           return null;
+            if (allHashtags.Count > 0)
+            {
+                var allHashtagsList = allHashtags.ToList(); 
+                allHashtagsList.Sort((ht1,ht2) => ht1.Value.CompareTo(ht2.Value));
+                topHashtagList.AddRange(allHashtagsList.Select(kv => kv.Key).ToList().Take(5));
+            }
+           
+           foreach (var hashtag in topHashtagList)
+           {
+               recommendedPosts.AddRange(await scrapService.GetHashtagPosts(hashtag));
+           }
+
+
+           return recommendedPosts;
         }
 
         private void InitTopLocationHashtagPosts(List<Post> posts)
         {
-            topHashtags = new Dictionary<string, int>();
+            allHashtags = new Dictionary<string, int>();
             topLocationCountries = new Dictionary<string, int>();
 
             foreach (var post in posts)
             {
                 foreach (var hashtag in post.HashTags)
                 {
-                    if(topHashtags.ContainsKey(hashtag))
-                        topHashtags[hashtag] += 1;
+                    if(allHashtags.ContainsKey(hashtag))
+                        allHashtags[hashtag] += 1;
                     else
-                        topHashtags[hashtag] = 1;
+                        allHashtags[hashtag] = 1;
                 }
 
-                if(topHashtags.ContainsKey(post.LocationCountry))
-                    topHashtags[post.LocationCountry] += 1;
+                if(allHashtags.ContainsKey(post.LocationCountry))
+                    allHashtags[post.LocationCountry] += 1;
                 else
-                    topHashtags[post.LocationCountry] = 1;
+                    allHashtags[post.LocationCountry] = 1;
             }
 
         }

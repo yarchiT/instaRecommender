@@ -54,7 +54,7 @@ namespace Insta.Services
             try
             {
                 var request = new HttpRequestMessage(HttpMethod.Get, 
-                    $"{BASE_URL}/?hashtag={hashtag}");
+                    $"{BASE_URL}/getTopHashtagPosts?hashtag={hashtag}");
 
                 var client = _clientFactory.CreateClient();
 

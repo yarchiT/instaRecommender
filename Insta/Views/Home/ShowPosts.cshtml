@@ -1,0 +1,36 @@
+@model List<Insta.Models.Post>
+
+@{
+var userProfileHref = "#";
+}
+
+@foreach (var item in Model) {
+    userProfileHref= "https://www.instagram.com/"+item.OwnerUsername;
+    <article class="article-post">
+        <section style="padding-top: 10px;">
+            <div>
+                <div>
+                    <header>
+                        <div>
+                            <h6> <a href="@(userProfileHref)">@item.OwnerUsername</a></h6>
+                        </div>
+                        <div>
+                            <span style="font-size: small">@(item.LocationName)</span>
+                        </div>
+                    </header>
+                    <div style="padding-top:5px; text-align: center">
+                        <img src="@(item.PhotoUrl)" class="user-post" alt="Instagram Post" />
+                    </div>
+                    <div>
+                        <p>
+                            <span style="font-weight:bold">@(item.OwnerUsername)</span>
+                            @item.Caption
+                        </p>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+    
+}

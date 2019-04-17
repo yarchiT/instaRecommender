@@ -9,6 +9,7 @@ class AccountInfoEntity():
 
 class PostEntity():
     def __init__(self):
+        self.OwnerUsername = ""
         self.HashTags = []
         self.PhotoUrl = ""
         self.Caption = ""

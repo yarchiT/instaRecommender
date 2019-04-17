@@ -63,4 +63,4 @@
 /home/yaroslav/Documents/4th_year/coursework_Insta/instaRecommender/Insta/obj/Debug/netcoreapp2.2/Insta.dll
 /home/yaroslav/Documents/4th_year/coursework_Insta/instaRecommender/Insta/obj/Debug/netcoreapp2.2/Insta.pdb
 /home/yaroslav/Documents/4th_year/coursework_Insta/instaRecommender/Insta/obj/Debug/netcoreapp2.2/Insta.csproj.CopyComplete
-/home/yaroslav/Documents/4th_year/coursework_Insta/instaRecommender/Insta/obj/Debug/netcoreapp2.2/Razor/Views/Home/GetUserPosts.g.cshtml.cs
+/home/yaroslav/Documents/4th_year/coursework_Insta/instaRecommender/Insta/obj/Debug/netcoreapp2.2/Razor/Views/Home/ShowPosts.g.cshtml.cs
