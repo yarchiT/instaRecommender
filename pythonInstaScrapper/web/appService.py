@@ -55,3 +55,15 @@ def get_account_info_json(username, num_of_posts):
     accountInfoJson = jsonpickle.encode(accountInfo, unpicklable=False)
     return accountInfoJson
 
+def get_top_hashtag_posts_json(hashtagId):
+    agent = None
+    posts = []
+    try:
+        agent = WebAgent()
+        agent.update(account)
+
+        accountInfo.Bio = account.biography
+        accountInfo.TotalMediaCount = account.media_count
+        posts = agent.get_media(account, count=num_of_posts)[0]  # account.media_count
+    except:
+        print("error while getting account info")

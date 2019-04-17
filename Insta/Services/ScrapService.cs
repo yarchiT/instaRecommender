@@ -3,12 +3,14 @@ using Insta.Models;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Insta.Services
 {
     public class ScrapService : IScrapService
     {
         private readonly IHttpClientFactory _clientFactory;
+        private readonly string BASE_URL = "http://localhost";
 
         public ScrapService(IHttpClientFactory clientFactory)
         {
@@ -21,7 +23,7 @@ namespace Insta.Services
             try
             {
                 var request = new HttpRequestMessage(HttpMethod.Get, 
-                $"http://localhost/?username={username}&postNum={numOfPosts}");
+                $"{BASE_URL}/?username={username}&postNum={numOfPosts}");
 
                 var client = _clientFactory.CreateClient();
 
@@ -45,6 +47,66 @@ namespace Insta.Services
             
             return null;
             
+        }
+
+        public async Task<List<Post>> GetHashtagPosts(string hashtag)
+        {
+            try
+            {
+                var request = new HttpRequestMessage(HttpMethod.Get, 
+                    $"{BASE_URL}/?hashtag={hashtag}");
+
+                var client = _clientFactory.CreateClient();
+
+                var response = await client.SendAsync(request);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonStringResponse = await response.Content.ReadAsStringAsync();
+                    var posts = JsonConvert.DeserializeObject<List<Post>>(jsonStringResponse);
+                    return posts;
+                }
+                else
+                {
+                    throw new Exception("Didn't parse hashtag posts properly");
+                }         
+
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
+            return null;
+        }
+
+        public async Task<List<Post>> GetTopLocationPosts(int locationId)
+        {
+            try
+            {
+                var request = new HttpRequestMessage(HttpMethod.Get, 
+                    $"{BASE_URL}/?locationId={locationId}");
+
+                var client = _clientFactory.CreateClient();
+
+                var response = await client.SendAsync(request);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonStringResponse = await response.Content.ReadAsStringAsync();
+                    var posts = JsonConvert.DeserializeObject<List<Post>>(jsonStringResponse);
+                    return posts;
+                }
+                else
+                {
+                    throw new Exception("Didn't parse locations properly");
+                }         
+
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
+            return null;
         }
     }
 }

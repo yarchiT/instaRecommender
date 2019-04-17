@@ -5,7 +5,7 @@ import appService
 app = Flask(__name__)
 
 @app.route('/')
-def hello():
+def fetchUserData():
     username = request.args.get('username')
     num_of_posts = request.args.get('postNum')
     if (username is None or username == "" or num_of_posts is None or num_of_posts == ""):
@@ -13,6 +13,14 @@ def hello():
 
     account_info_json = appService.get_account_info_json(username, int(num_of_posts))
     return Response(account_info_json, status=200, mimetype='application/json')
+
+@app.route('/getTopHashtagPosts')
+def fetchUserData():
+    hashtagId = request.args.get('hashtagId')
+    if (hashtagId is None or hashtagId == ""):
+        return Response("Invalid request", status=404, mimetype='application/json')
+
+    return Response(hashtagId, status=200, mimetype='application/json')
 
 
 if __name__ == "__main__":

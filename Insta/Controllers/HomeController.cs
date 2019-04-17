@@ -14,12 +14,14 @@ namespace Insta.Controllers
     public class HomeController : Controller
     {
         private readonly IScrapService _scrapService;
+        private readonly IRecommenderService _recommenderService;
         private readonly InstaWebDbContext _context;
 
-        public HomeController(IScrapService scrapService, InstaWebDbContext context)
+        public HomeController(IScrapService scrapService, InstaWebDbContext context, IRecommenderService recommenderService)
         {
             _scrapService = scrapService;
             _context = context;
+            _recommenderService = recommenderService;
         }
         public async Task<IActionResult> Index()
         {
@@ -28,23 +30,25 @@ namespace Insta.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUserPosts(string username)
         {
-            var userPosts = new List<Post>();
             AccountInfo accountInfo = null;
             try{
                 accountInfo = await _scrapService.GetAccountInfoAsync(username, 2);
-                var account = await _context.AccountInfo.FirstOrDefaultAsync(x => x.Username == accountInfo.Username);
+                if (accountInfo != null){
+                    var recommendedPosts = _recommenderService.GetRecommededPosts(_scrapService, accountInfo);
+                    var account = await _context.AccountInfo.FirstOrDefaultAsync(x => x.Username == accountInfo.Username);
 
-                if (account == null)
-                {
-                    await _context.AccountInfo.AddAsync(accountInfo);
-                    await _context.SaveChangesAsync();
+                    if (account == null)
+                    {
+                        await _context.AccountInfo.AddAsync(accountInfo);
+                        await _context.SaveChangesAsync();
+                    }
                 }
-                userPosts = accountInfo.Posts;
+                
             }catch (Exception ex){
 
             }
 
-            if (userPosts?.Count == 0 || accountInfo == null)
+            if ( accountInfo == null || accountInfo.Posts?.Count == 0 )
                 return View("Index", "We coudn't fetch data from your profile");
             
             return View(accountInfo);

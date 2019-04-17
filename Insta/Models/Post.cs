@@ -8,6 +8,7 @@ namespace Insta.Models
     {
         public int ID { get; set; }
         public string[] HashTags {get; set;}
+        public string AccessibilityCaption { get; set; }
         public string PhotoUrl { get; set; }
         public string Caption { get; set; }
         public int LocationId {get;set;}
@@ -15,5 +16,6 @@ namespace Insta.Models
         public string LocationCountry { get; set;}
 
         public AccountInfo AccountInfo {get;set;}
+        public int AccountInfoID { get; set;}
     }
 }

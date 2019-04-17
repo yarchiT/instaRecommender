@@ -2,7 +2,7 @@
 
 namespace Insta.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,12 +29,13 @@ namespace Insta.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     HashTags = table.Column<string>(nullable: true),
+                    AccessibilityCaption = table.Column<string>(nullable: true),
                     PhotoUrl = table.Column<string>(nullable: true),
                     Caption = table.Column<string>(nullable: true),
                     LocationId = table.Column<int>(nullable: false),
                     LocationName = table.Column<string>(nullable: true),
                     LocationCountry = table.Column<string>(nullable: true),
-                    AccountInfoID = table.Column<int>(nullable: true)
+                    AccountInfoID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,7 +45,7 @@ namespace Insta.Migrations
                         column: x => x.AccountInfoID,
                         principalTable: "AccountInfo",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
