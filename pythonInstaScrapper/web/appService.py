@@ -34,7 +34,11 @@ def get_account_info_json(username, num_of_posts):
                 postEntity.LocationName = post.location.name
                 if post.location.directory is not None:
                     postEntity.LocationCountry = post.location.directory.get("country").get("name")
-                
+
+            if not post.accessibility_caption is None:
+                postEntity.AccessibilityCaption = post.accessibility_caption
+
+              
             if not post.caption is None:
                 postEntity.HashTags = re.findall(r"#(\w+)", post.caption)
                 postEntity.Caption = post.caption

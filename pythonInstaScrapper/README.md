@@ -25,6 +25,12 @@ You need to build and run the docker-compose file
     docler-compose up --build -d
 ``` 
 
+It uses your localhost port 80 to connect, so before that check if your port 80 is exposed. If everything okay, go to your browser and run:
+
+http://localhost/?username={instaUsername}&postNum={numberOfPosts}
+
+(ex. http://localhost/?username=simplemove17&postNum=2)
+
 ## Development details
 
 **Web app:**

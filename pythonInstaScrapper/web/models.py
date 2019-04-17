@@ -15,5 +15,6 @@ class PostEntity():
         self.LocationId = ""
         self.LocationName = ""
         self.LocationCountry = ""
+        self.AccessibilityCaption = ""
 
         
