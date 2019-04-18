@@ -1,28 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "/home/yaroslav/Documents/4th_year/coursework_Insta/instaRecommender/Insta/Insta.csproj": {}
+    "C:\\Users\\tykhonchuk\\Documents\\my\\instaRecommender\\Insta\\Insta.csproj": {}
   },
   "projects": {
-    "/home/yaroslav/Documents/4th_year/coursework_Insta/instaRecommender/Insta/Insta.csproj": {
+    "C:\\Users\\tykhonchuk\\Documents\\my\\instaRecommender\\Insta\\Insta.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/yaroslav/Documents/4th_year/coursework_Insta/instaRecommender/Insta/Insta.csproj",
+        "projectUniqueName": "C:\\Users\\tykhonchuk\\Documents\\my\\instaRecommender\\Insta\\Insta.csproj",
         "projectName": "Insta",
-        "projectPath": "/home/yaroslav/Documents/4th_year/coursework_Insta/instaRecommender/Insta/Insta.csproj",
-        "packagesPath": "/home/yaroslav/.nuget/packages/",
-        "outputPath": "/home/yaroslav/Documents/4th_year/coursework_Insta/instaRecommender/Insta/obj/",
+        "projectPath": "C:\\Users\\tykhonchuk\\Documents\\my\\instaRecommender\\Insta\\Insta.csproj",
+        "packagesPath": "C:\\Users\\tykhonchuk\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tykhonchuk\\Documents\\my\\instaRecommender\\Insta\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "/home/yaroslav/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\tykhonchuk\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

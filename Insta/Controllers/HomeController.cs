@@ -64,7 +64,7 @@ namespace Insta.Controllers
         {
             List<Post> recommendedPosts = null;
             try{
-                AccountInfo accountInfo = await _scrapService.GetAccountInfoAsync(username, 2);
+                AccountInfo accountInfo = await _scrapService.GetAccountInfoAsync(username, 10);
                 if (accountInfo != null){
                     recommendedPosts = await _recommenderService.GetRecommededPosts(_scrapService, accountInfo);
                 }
