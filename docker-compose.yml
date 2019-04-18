@@ -16,32 +16,32 @@ services:
     command: gunicorn --bind 0.0.0.0:5000 wsgi:app   # uncomment for production
     volumes:
       - .:/code
-    ports:
-      - "5000"
+    # ports:
+    #   - "5000"
     networks:
       - web_nw
     # depends_on:
     #   - postgres
   
-  nginx:
-    image: nginx:latest
-    build: ./pythonInstaScrapper/nginx
-    ports:
-      - "1234:1234"
-    volumes:
-      - ./nginx:/etc/nginx/conf.d
-    depends_on:
-      - web
-      - insta
-    networks:
-      - web_nw
+  # nginx:
+  #   image: nginx:latest
+  #   build: ./pythonInstaScrapper/nginx
+  #   ports:
+  #     - "1234:1234"
+  #   volumes:
+  #     - ./nginx:/etc/nginx/conf.d
+  #   depends_on:
+  #     - web
+  #     - insta
+  #   networks:
+  #     - web_nw
 
 
 volumes:
   dbdata:
 
 networks:
-  db_nw:
-    driver: bridge
+  # db_nw:
+  #   driver: bridge
   web_nw:
     driver: bridge
