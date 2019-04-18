@@ -10,7 +10,7 @@ namespace Insta.Services
     public class ScrapService : IScrapService
     {
         private readonly IHttpClientFactory _clientFactory;
-        private readonly string BASE_URL = "http://localhost:1234";
+        private readonly string BASE_URL = "http://web:5000";
 
         public ScrapService(IHttpClientFactory clientFactory)
         {

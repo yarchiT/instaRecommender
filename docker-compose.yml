@@ -1,10 +1,19 @@
 version: '3'
 
 services:
+  insta:
+    build: ./Insta/
+    command: dotnet dockernet/Insta.dll
+    ports:
+      - "80:80"
+    networks:
+      - web_nw
+    depends_on:
+      - web
+
   web:
-    build: ./web
+    build: ./pythonInstaScrapper/web
     command: gunicorn --bind 0.0.0.0:5000 wsgi:app   # uncomment for production
-    # command: python app.py
     volumes:
       - .:/code
     ports:
@@ -19,13 +28,14 @@ services:
   
   nginx:
     image: nginx:latest
-    build: ./nginx
+    build: ./pythonInstaScrapper/nginx
     ports:
       - "1234:1234"
     volumes:
       - ./nginx:/etc/nginx/conf.d
     depends_on:
       - web
+      - insta
     networks:
       - web_nw
 

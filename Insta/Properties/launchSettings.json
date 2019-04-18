@@ -18,7 +18,7 @@
     "Insta": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:8080;http://localhost:8081",
+      "applicationUrl": "https://localhost:80;http://localhost:81",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production"
       }

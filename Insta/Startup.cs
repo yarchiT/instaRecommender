@@ -35,8 +35,8 @@ namespace Insta
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<InstaWebDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("InstaRecommenderContext")));
+            // services.AddDbContext<InstaWebDbContext>(options =>
+            //     options.UseSqlite(Configuration.GetConnectionString("InstaRecommenderContext")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddHttpClient();

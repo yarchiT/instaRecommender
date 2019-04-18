@@ -17,10 +17,16 @@ namespace Insta.Controllers
         private readonly IRecommenderService _recommenderService;
         private readonly InstaWebDbContext _context;
 
-        public HomeController(IScrapService scrapService, InstaWebDbContext context, IRecommenderService recommenderService)
+        // public HomeController(IScrapService scrapService, InstaWebDbContext context, IRecommenderService recommenderService)
+        // {
+        //     _scrapService = scrapService;
+        //     _context = context;
+        //     _recommenderService = recommenderService;
+        // }
+
+         public HomeController(IScrapService scrapService,  IRecommenderService recommenderService)
         {
             _scrapService = scrapService;
-            _context = context;
             _recommenderService = recommenderService;
         }
         public async Task<IActionResult> Index()
@@ -34,13 +40,13 @@ namespace Insta.Controllers
             try{
                 accountInfo = await _scrapService.GetAccountInfoAsync(username, 20);
                 if (accountInfo != null){
-                    var account = await _context.AccountInfo.FirstOrDefaultAsync(x => x.Username == accountInfo.Username);
+                    // var account = await _context.AccountInfo.FirstOrDefaultAsync(x => x.Username == accountInfo.Username);
 
-                    if (account == null)
-                    {
-                        await _context.AccountInfo.AddAsync(accountInfo);
-                        await _context.SaveChangesAsync();
-                    }
+                    // if (account == null)
+                    // {
+                    //     await _context.AccountInfo.AddAsync(accountInfo);
+                    //     await _context.SaveChangesAsync();
+                    // }
                 }
                 
             }catch (Exception ex){
