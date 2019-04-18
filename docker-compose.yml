@@ -22,9 +22,6 @@ services:
       - web_nw
     # depends_on:
     #   - postgres
-    networks:
-      - db_nw
-      - web_nw
   
   nginx:
     image: nginx:latest
