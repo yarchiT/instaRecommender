@@ -29,7 +29,7 @@ def get_top_location_posts():
     if (locationId is None or locationId == ""):
         return Response("Invalid request", status=404, mimetype='application/json')
 
-    topHashtagPostsJson = appService.get_top_hashtag_posts_json(locationId)
+    topHashtagPostsJson = appService.get_top_location_posts_json(locationId)
     return Response(topHashtagPostsJson, status=200, mimetype='application/json')
 
 

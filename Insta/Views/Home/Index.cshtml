@@ -2,8 +2,7 @@
 @model String
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Instagram posts recommender system</p>
+    <h1 class="display-5">Система рекомендацій постів в Instagram</h1>
 </div>
 
 @if (Model != null)
@@ -13,11 +12,11 @@
     </div>
 }
 
-<div class="container">
-   <p>Your Instagram account should be public</p>
+<div class="container" style="margin-top: 2em">
+   <span>Ваш профіль повинен бути публічним та містити хештеги або локації</span>
     
-    <form asp-controller="Home" asp-action="GetRecommendedPosts" class="form-group" method="get">
+    <form asp-controller="Home" asp-action="GetRecommendedPosts" class="form-group" method="get" style="margin-top: 1em;">
         <input type="text" id="username" name="username" value="" placeholder="username">
-        <button type="submit">Submit Form</button>
+        <button class="btn btn-primary" type="submit">Submit Form</button>
     </form>
 </div>

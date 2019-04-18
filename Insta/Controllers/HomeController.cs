@@ -65,16 +65,16 @@ namespace Insta.Controllers
             List<Post> recommendedPosts = null;
             try{
                 AccountInfo accountInfo = await _scrapService.GetAccountInfoAsync(username, 10);
-                if (accountInfo != null){
+                if (accountInfo != null && accountInfo.Posts.Count != 0){
                     recommendedPosts = await _recommenderService.GetRecommededPosts(_scrapService, accountInfo);
                 }
                 
             }catch (Exception ex){
-
+                return View("Index", "We coudn't fetch data from your profile");
             }
 
             if ( recommendedPosts == null || recommendedPosts?.Count == 0 )
-                return View("Index", "We coudn't fetch data from your profile");
+                return View("Index", "There are no hashtags or locations on your page. Or we did a mistake");
             
             return View("ShowPosts", recommendedPosts);
         }

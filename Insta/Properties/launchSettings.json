@@ -12,13 +12,13 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Production"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "Insta": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:80;http://localhost:81",
+      "applicationUrl": "https://localhost:80;http://localhost:80",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production"
       }

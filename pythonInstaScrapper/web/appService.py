@@ -19,7 +19,7 @@ def get_account_info_json(username, num_of_posts):
         accountInfo.Bio = account.biography
         accountInfo.TotalMediaCount = account.media_count
         posts = agent.get_media(account, count=num_of_posts)[0]  # account.media_count
-    except:
+    except Exception as e:
         print("error while getting account info")
    
     if agent is None or accountInfo is None:

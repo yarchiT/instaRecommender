@@ -76,7 +76,7 @@ namespace Insta.Services
                 }
 
                 if (post.LocationCountry == null || post.LocationCountry == "" || post.LocationId == null || post.LocationId == "")
-                    return;
+                    continue;
                     
                 LocationDto locationDto = new LocationDto
                 {

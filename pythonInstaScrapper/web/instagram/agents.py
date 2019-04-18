@@ -104,7 +104,7 @@ class WebAgent:
                     else:
                         m.likes_count = node["edge_liked_by"]
 
-                    m.accessibility_caption = node["accessibility_caption"]
+                    #m.accessibility_caption = node["accessibility_caption"]
                     obj.media.add(m)
                     medias.append(m)
 
