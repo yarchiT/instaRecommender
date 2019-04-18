@@ -23,6 +23,15 @@ def get_top_hashtag_posts():
     topHashtagPostsJson = appService.get_top_hashtag_posts_json(hashtag)
     return Response(topHashtagPostsJson, status=200, mimetype='application/json')
 
+@app.route('/getTopLocationPosts')
+def get_top_location_posts():
+    locationId = request.args.get('locationId')
+    if (locationId is None or locationId == ""):
+        return Response("Invalid request", status=404, mimetype='application/json')
+
+    topHashtagPostsJson = appService.get_top_hashtag_posts_json(locationId)
+    return Response(topHashtagPostsJson, status=200, mimetype='application/json')
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)

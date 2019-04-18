@@ -39,7 +39,7 @@ services:
     image: nginx:latest
     build: ./nginx
     ports:
-      - "80:80"
+      - "1234:1234"
     volumes:
       - ./nginx:/etc/nginx/conf.d
     depends_on:

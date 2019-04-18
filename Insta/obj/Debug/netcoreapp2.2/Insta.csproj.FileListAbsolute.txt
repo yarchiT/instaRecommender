@@ -49,8 +49,6 @@
 /home/yaroslav/Documents/4th_year/coursework_Insta/instaRecommender/Insta/obj/Debug/netcoreapp2.2/Insta.TagHelpers.output.cache
 /home/yaroslav/Documents/4th_year/coursework_Insta/instaRecommender/Insta/obj/Debug/netcoreapp2.2/Insta.RazorCoreGenerate.cache
 /home/yaroslav/Documents/4th_year/coursework_Insta/instaRecommender/Insta/obj/Debug/netcoreapp2.2/Razor/Views/Home/Index.g.cshtml.cs
-/home/yaroslav/Documents/4th_year/coursework_Insta/instaRecommender/Insta/obj/Debug/netcoreapp2.2/Razor/Views/Post/Details.g.cshtml.cs
-/home/yaroslav/Documents/4th_year/coursework_Insta/instaRecommender/Insta/obj/Debug/netcoreapp2.2/Razor/Views/Post/Index.g.cshtml.cs
 /home/yaroslav/Documents/4th_year/coursework_Insta/instaRecommender/Insta/obj/Debug/netcoreapp2.2/Razor/Views/Shared/Error.g.cshtml.cs
 /home/yaroslav/Documents/4th_year/coursework_Insta/instaRecommender/Insta/obj/Debug/netcoreapp2.2/Razor/Views/Shared/_CookieConsentPartial.g.cshtml.cs
 /home/yaroslav/Documents/4th_year/coursework_Insta/instaRecommender/Insta/obj/Debug/netcoreapp2.2/Razor/Views/Shared/_Layout.g.cshtml.cs

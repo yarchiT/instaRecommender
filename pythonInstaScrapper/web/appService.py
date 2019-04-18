@@ -46,6 +46,21 @@ def get_top_hashtag_posts_json(hashtag):
     topHashtagPostsJson = jsonpickle.encode(parsedPosts, unpicklable=False)
     return topHashtagPostsJson
 
+def get_top_location_posts_json(locationId):
+    agent = None
+    parsedPosts = []
+    try:
+        agent = WebAgent()
+        location = Location(locationId)
+        agent.update(location)
+        posts = agent.get_media(location, count=3)[0]
+        parsedPosts = _get_list_of_parsed_posts(agent, posts, True)
+    except:
+        print("error while getting account info")
+    
+    top_location_posts_json = jsonpickle.encode(parsedPosts, unpicklable=False)
+    return top_location_posts_json
+
 
 
 def _get_list_of_parsed_posts(agent, posts, needsUpdate=False):

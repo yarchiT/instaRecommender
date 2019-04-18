@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,33 +9,59 @@ namespace Insta.Services
     public class RecommenderService : IRecommenderService
     {
         private Dictionary<string,int> allHashtags;
-        private Dictionary<string,int> topLocationCountries;
+        private Dictionary<LocationDto,int> topLocationCountries;
         public async Task<List<Post>> GetRecommededPosts(IScrapService scrapService, AccountInfo user)
         {
             var recommendedPosts = new List<Post>(); 
             InitTopLocationHashtagPosts(user.Posts);
-            var topHashtagList = new List<string>();
+            recommendedPosts.AddRange(await GetTopLocationPosts(scrapService));
+            recommendedPosts.AddRange(await GetTopHashtagPosts(scrapService));
+            
+           return recommendedPosts;
+        }
 
-            if (allHashtags.Count > 0)
+        private async Task<IEnumerable<Post>> GetTopLocationPosts(IScrapService scrapService)
+        {
+            var topCountriesList = new List<LocationDto>();
+            var topLocationPostsList = new List<Post>();
+            if (topLocationCountries.Count > 0)
             {
-                var allHashtagsList = allHashtags.ToList(); 
-                allHashtagsList.Sort((ht1,ht2) => ht1.Value.CompareTo(ht2.Value));
-                topHashtagList.AddRange(allHashtagsList.Select(kv => kv.Key).ToList().Take(5));
+                var allCountriesList = topLocationCountries.ToList(); 
+                allCountriesList.Sort((ht1,ht2) => ht1.Value.CompareTo(ht2.Value));
+                topCountriesList.AddRange(allCountriesList.Select(kv => kv.Key).ToList().Take(3));
             }
            
-           foreach (var hashtag in topHashtagList)
+           foreach (var locationDto in topCountriesList)
            {
-               recommendedPosts.AddRange(await scrapService.GetHashtagPosts(hashtag));
+               topLocationPostsList.AddRange(await scrapService.GetTopLocationPosts(locationDto.locationId));
            }
 
+           return topLocationPostsList;
+        }
 
-           return recommendedPosts;
+        private async Task<IEnumerable<Post>> GetTopHashtagPosts(IScrapService scrapService)
+        {
+            var topCountriesList = new List<string>();
+            var topHashtagPostsList = new List<Post>();
+            if (topLocationCountries.Count > 0)
+            {
+                var allCountriesList = allHashtags.ToList(); 
+                allCountriesList.Sort((ht1,ht2) => ht1.Value.CompareTo(ht2.Value));
+                topCountriesList.AddRange(allCountriesList.Select(kv => kv.Key).ToList().Take(5));
+            }
+           
+           foreach (var countryName in topCountriesList)
+           {
+               topHashtagPostsList.AddRange(await scrapService.GetHashtagPosts(countryName));
+           }
+
+           return topHashtagPostsList;
         }
 
         private void InitTopLocationHashtagPosts(List<Post> posts)
         {
             allHashtags = new Dictionary<string, int>();
-            topLocationCountries = new Dictionary<string, int>();
+            topLocationCountries = new Dictionary<LocationDto, int>();
 
             foreach (var post in posts)
             {
@@ -46,12 +73,26 @@ namespace Insta.Services
                         allHashtags[hashtag] = 1;
                 }
 
-                if(allHashtags.ContainsKey(post.LocationCountry))
-                    allHashtags[post.LocationCountry] += 1;
+                LocationDto locationDto = new LocationDto
+                {
+                    countryName = post.LocationCountry,
+                    locationId = post.LocationId
+                };
+
+                if(topLocationCountries.ContainsKey(locationDto))
+                    topLocationCountries[locationDto] += 1;
                 else
-                    allHashtags[post.LocationCountry] = 1;
+                {   
+                    topLocationCountries[locationDto] = 1;
+                }
+                    
             }
 
+        }
+
+        private struct LocationDto{
+            public string countryName { get; set;}
+            public string locationId { get; set;}
         }
 
     }

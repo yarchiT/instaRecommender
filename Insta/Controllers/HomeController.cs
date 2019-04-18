@@ -61,13 +61,6 @@ namespace Insta.Controllers
                 AccountInfo accountInfo = await _scrapService.GetAccountInfoAsync(username, 2);
                 if (accountInfo != null){
                     recommendedPosts = await _recommenderService.GetRecommededPosts(_scrapService, accountInfo);
-                    var account = await _context.AccountInfo.FirstOrDefaultAsync(x => x.Username == accountInfo.Username);
-
-                    if (account == null)
-                    {
-                        await _context.AccountInfo.AddAsync(accountInfo);
-                        await _context.SaveChangesAsync();
-                    }
                 }
                 
             }catch (Exception ex){

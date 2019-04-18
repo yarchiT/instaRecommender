@@ -10,7 +10,7 @@ namespace Insta.Services
     public class ScrapService : IScrapService
     {
         private readonly IHttpClientFactory _clientFactory;
-        private readonly string BASE_URL = "http://localhost";
+        private readonly string BASE_URL = "http://localhost:1234";
 
         public ScrapService(IHttpClientFactory clientFactory)
         {
@@ -79,12 +79,12 @@ namespace Insta.Services
             return null;
         }
 
-        public async Task<List<Post>> GetTopLocationPosts(int locationId)
+        public async Task<List<Post>> GetTopLocationPosts(string locationId)
         {
             try
             {
                 var request = new HttpRequestMessage(HttpMethod.Get, 
-                    $"{BASE_URL}/?locationId={locationId}");
+                    $"{BASE_URL}/getTopLocationPosts?locationId={locationId}");
 
                 var client = _clientFactory.CreateClient();
 
